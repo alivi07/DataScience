@@ -1,0 +1,75 @@
+---
+title: "Modul5"
+author: "Alivi Milova"
+date: "3/1/2020"
+output: pdf_document
+---
+```{r}
+library(dslabs)
+data(murders)
+View(murders)
+```
+# Tugas Modul 5
+
+## Nomor 1
+
+```{r}
+murders$state
+```
+
+```{r}
+
+new_names <- vector("numeric", 51)
+for (i in 1:51) {
+  x<-c(murders$state[i])
+  if(nchar(x)>8){
+  new_names[i]<-murders$abb[i]
+  
+  }else{
+    new_names[i]<-murders$state[i]
+  }
+}
+print(new_names)
+```
+## Nomor 2
+```{r}
+
+hitung<-function(n){
+  x<-1:n
+  sum(x)
+}
+n<-5000
+hitung(n)
+```
+
+## Nomor 3
+
+```{r}
+compute_s_n <- function(n){
+  x <- 1:n
+  y <- x^2
+  sum(y)
+}
+n <- 10
+compute_s_n(n)
+```
+
+## Nomor 4
+```{r}
+
+m <- 25
+s_n <- vector("numeric", 25)
+for (n in 1:m) {
+  s_n[n] <- compute_s_n(n)
+}
+print(s_n)
+```
+
+## Nomor 5
+```{r}
+
+n <- 1: 25
+s_n <- sapply(n, compute_s_n)
+s_n
+```
+

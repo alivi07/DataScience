@@ -1,0 +1,70 @@
+---
+title: "123170062_Tugas4"
+author: "Alivi Milova"
+date: "4/9/2020"
+output: word_document
+---
+---
+title: "tokopedia"
+author: "Alivi Milova"
+date: "4/9/2020"
+output: word_document
+---
+```{r}
+library(rvest)
+```
+
+
+```{r}
+url<-"https://www.tokopedia.com/p/komputer-laptop/laptop?page=1&is_discount=true&rt=4,5"
+```
+
+## 2.	Untuk membaca  halaman dari website yang akan di scraping di setiap halaman websitenya maka digunakan fungsi read_html
+
+```{r}
+web <- read_html(url)
+web
+```
+
+## 3.	Mengekstrak informasi judul buku dengan fungsi html_nodes dari syntax html pada web, untuk mengetahui kodingan atau syntax html nya bisa dengan klik kanan pada baris yang dituju di web kemudian pilih inspect atau bisa dengan mendownload selectorgadget dan pasangkan pada crome. Gunakan juga html_text untuk mengambil textnya lalu agar datanya terbaca dengan tanpa space sebelum atau sesudah teks.
+
+```{r}
+nama_barang <-web %>% html_nodes(".css-1bjwylw") %>% html_text(trim = TRUE)
+nama_barang
+```
+
+## 4.	Ulangi langkah 3 untuk setiap kelas sesuai data yang dibutuhkan yaitu pengarang, detail buku, harga, harga diskon, diskon, dan status buku. Hasilnya sebagai berikut
+
+```{r}
+harga_barang <-web %>% html_nodes(".css-o5uqvq") %>% html_text(trim = TRUE)
+harga_barang
+```
+
+
+```{r}
+rating <-web %>% html_nodes(".css-153qjw7") %>% html_text(trim = TRUE)
+rating
+```
+
+```{r}
+harga_diskon_barang <-web %>% html_nodes(".css-1djbxkr") %>% html_text(trim = TRUE)
+harga_diskon_barang
+```
+
+## 5. langkah terakhir gunakan data.frame untuk menggabungkan beberapa data yang diperoleh dilangkah sebelumnya sehingga menjadi satu kesatuan data yang utuh 
+```{r}
+tokopedia <- data.frame(Nama = nama_barang, Harga = harga_barang, Diskon = harga_diskon_barang, Peringkat = rating)
+```
+
+## 6. untuk melihat data frame yang sudah dibuat bisa dengat str()
+
+```{r}
+str(tokopedia)
+```
+
+## 7. selanjutnya untuk melihat isi dari data frame yang sudah dibuat bisa dengan memanggil nama dari data frame tersebut.
+```{r}
+tokopedia
+```
+
+## membuat data frame telah selesai dan untuk kedepannya data frame bisa dikelola lebih lanjut semisal mencari rata-rata atau harga tertinggi dan lain sebagainya
